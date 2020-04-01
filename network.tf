@@ -8,6 +8,14 @@ resource "vsphere_distributed_virtual_switch" "dvs" {
   standby_uplinks = ["uplink2"]
   max_mtu         = "1600"
   host {
+    host_system_id = data.vsphere_host.tkg_shuttle.0.id
+    devices        = ["vmnic0"]
+  }
+  host {
+    host_system_id = data.vsphere_host.tkg_shuttle.1.id
+    devices        = ["vmnic0"]
+  }
+  host {
     host_system_id = data.vsphere_host.hosts.0.id
     devices        = var.network_interfaces
   }
@@ -41,4 +49,11 @@ resource "vsphere_distributed_port_group" "pg-3" {
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.dvs.id
 
   vlan_id = 64
+}
+
+resource "vsphere_distributed_port_group" "pg-4" {
+  name                            = "tf-esx-mgmt"
+  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.dvs.id
+
+  vlan_id = 0
 }
