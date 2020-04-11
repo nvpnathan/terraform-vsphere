@@ -17,7 +17,7 @@ variable "all-hosts" {
   default = [
     "vlab-esx-80.vballin.com",
     "vlab-esx-90.vballin.com",
-    "vlab-esx-110.vballin.com",
+    "vlab-esx-100.vballin.com",
     "vlab-esx-110.vballin.com",
     "vlab-esx-120.vballin.com",
     "vlab-esx-130.vballin.com",
