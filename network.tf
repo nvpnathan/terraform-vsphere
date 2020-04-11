@@ -45,11 +45,11 @@ resource "vsphere_distributed_port_group" "pg-2" {
 
 
 resource "vsphere_distributed_port_group" "pg-3" {
-  name                            = "tf-vlab-mgmt"
+  name                            = "tf-tkg-mgmt"
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.dvs.id
   type = "ephemeral"
   auto_expand = false
-  
+  number_of_ports = 200
   vlan_id = 64
 }
 
@@ -58,4 +58,50 @@ resource "vsphere_distributed_port_group" "pg-4" {
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.dvs.id
   
   vlan_id = 0
+}
+
+resource "vsphere_distributed_virtual_switch" "dvs-mgmt" {
+  name          = "tf-mgmt"
+  datacenter_id = data.vsphere_datacenter.dc.id
+  version         = "6.5.0"
+  uplinks         = ["uplink1", "uplink2"]
+  active_uplinks  = ["uplink1"]
+  standby_uplinks = ["uplink2"]
+  max_mtu         = "1600"
+
+  host {
+    host_system_id = data.vsphere_host.tkg_mgmt.0.id
+    devices        = ["vmnic0", "vmnic1"]
+  }
+  host {
+    host_system_id = data.vsphere_host.tkg_mgmt.1.id
+    devices        = ["vmnic0", "vmnic1"]
+  }
+  host {
+    host_system_id = data.vsphere_host.tkg_mgmt.2.id
+    devices        = ["vmnic0", "vmnic1"]
+  }
+}
+
+resource "vsphere_distributed_port_group" "tkg-mgmt-pg-1" {
+  name                            = "tf-vlab-mgmt"
+  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.dvs-mgmt.id
+  type = "ephemeral"
+  auto_expand = false
+  number_of_ports = 200
+  vlan_id = 64
+}
+
+resource "vsphere_distributed_port_group" "tkg-mgmt-pg-2" {
+  name                            = "tf-vlab-esxi"
+  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.dvs-mgmt.id
+
+  vlan_id = 79
+}
+
+resource "vsphere_distributed_port_group" "tkg-mgmt-pg-3" {
+  name                            = "tf-vlab-dmz"
+  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.dvs-mgmt.id
+
+  vlan_id = 69
 }

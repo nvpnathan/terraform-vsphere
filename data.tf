@@ -20,3 +20,9 @@ data "vsphere_host" "tkg_shuttle" {
   name          = var.tkg-hosts[count.index]
   datacenter_id = data.vsphere_datacenter.dc.id
 }
+
+data "vsphere_host" "tkg_mgmt" {
+  count         = length(var.tkg-mgmt-hosts)
+  name          = var.tkg-mgmt-hosts[count.index]
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
