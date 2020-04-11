@@ -55,3 +55,38 @@ variable "tag_category" {
   type        = string
   description = "tag category"
 }
+
+variable "qnap_nas" {
+  type        = string
+  description = "QNAP IP for datastores"
+}
+
+variable "datastore_1" {
+  type        = string
+  description = "datastores"
+}
+
+variable "datastore_2" {
+  type        = string
+  description = "datastores"
+}
+
+variable "datastore_4" {
+  type        = string
+  description = "datastores"
+}
+
+variable "datastore_1_path" {
+  type        = string
+  description = "NAS NFS Path"
+}
+
+variable "datastore_2_path" {
+  type        = string
+  description = "NAS NFS Path"
+}
+
+variable "datastore_4_path" {
+  type        = string
+  description = "NAS NFS Path"
+}
