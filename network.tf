@@ -33,7 +33,7 @@ resource "vsphere_distributed_port_group" "pg-1" {
   name                            = "tf-edge-tunnel"
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.dvs.id
 
-  vlan_id = 82
+  vlan_id = 80
 }
 
 resource "vsphere_distributed_port_group" "pg-2" {
@@ -47,15 +47,8 @@ resource "vsphere_distributed_port_group" "pg-2" {
 resource "vsphere_distributed_port_group" "pg-3" {
   name                            = "tf-tkg-mgmt"
   distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.dvs.id
-  type = "ephemeral"
-  auto_expand = false
-  number_of_ports = 200
+
   vlan_id = 64
-  lifecycle {
-    ignore_changes = [
-      number_of_ports,
-    ]
-  }
 }
 
 resource "vsphere_distributed_port_group" "pg-4" {
