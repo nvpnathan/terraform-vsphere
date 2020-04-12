@@ -5,6 +5,11 @@ resource "vsphere_nas_datastore" "datastore-1" {
   type         = "NFS"
   remote_hosts = [var.qnap_nas]
   remote_path  = var.datastore_1_path
+  lifecycle {
+    ignore_changes = [
+      tags,
+    ]
+  }
 }
 
 resource "vsphere_nas_datastore" "datastore-2" {

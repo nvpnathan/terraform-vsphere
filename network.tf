@@ -7,14 +7,14 @@ resource "vsphere_distributed_virtual_switch" "dvs" {
   active_uplinks  = ["uplink1"]
   standby_uplinks = ["uplink2"]
   max_mtu         = "1600"
-  # host {
-  #   host_system_id = data.vsphere_host.tkg_shuttle.0.id
-  #   devices        = ["vmnic0"]
-  # }
-  # host {
-  #   host_system_id = data.vsphere_host.tkg_shuttle.1.id
-  #   devices        = ["vmnic0"]
-  # }
+  host {
+    host_system_id = data.vsphere_host.tkg_shuttle.0.id
+    devices        = ["vmnic0"]
+  }
+  host {
+    host_system_id = data.vsphere_host.tkg_shuttle.1.id
+    devices        = ["vmnic0"]
+  }
   host {
     host_system_id = data.vsphere_host.hosts.0.id
     devices        = var.network_interfaces
@@ -51,6 +51,11 @@ resource "vsphere_distributed_port_group" "pg-3" {
   auto_expand = false
   number_of_ports = 200
   vlan_id = 64
+  lifecycle {
+    ignore_changes = [
+      number_of_ports,
+    ]
+  }
 }
 
 resource "vsphere_distributed_port_group" "pg-4" {
@@ -90,6 +95,11 @@ resource "vsphere_distributed_port_group" "tkg-mgmt-pg-1" {
   auto_expand = false
   number_of_ports = 200
   vlan_id = 64
+  lifecycle {
+    ignore_changes = [
+      number_of_ports,
+    ]
+  }
 }
 
 resource "vsphere_distributed_port_group" "tkg-mgmt-pg-2" {
