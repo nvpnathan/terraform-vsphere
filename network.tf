@@ -108,3 +108,10 @@ resource "vsphere_distributed_port_group" "tkg-mgmt-pg-3" {
 
   vlan_id = 69
 }
+
+resource "vsphere_distributed_port_group" "tkg_k8s_mgmt" {
+  name                            = var.mgmt_net
+  distributed_virtual_switch_uuid = vsphere_distributed_virtual_switch.dvs-mgmt.id
+
+  vlan_id = var.mgmt_net_vlan
+}

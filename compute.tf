@@ -48,6 +48,22 @@ resource "vsphere_compute_cluster" "tkg_mgmt" {
   }
 }
 
+resource "vsphere_resource_pool" "resource_pool-1" {
+  name                    = var.mgmt_rp
+  parent_resource_pool_id = vsphere_compute_cluster.tkg_mgmt.resource_pool_id
+}
+
+resource "vsphere_resource_pool" "resource_pool-2" {
+  name                    = var.comp_rp
+  parent_resource_pool_id = vsphere_compute_cluster.tkg_cluster.resource_pool_id
+}
+
+resource "vsphere_folder" "folder_tkg" {
+  path          = var.vm_folder_tkg
+  type          = "vm"
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
 resource "vsphere_host" "tkg-mgmt-host-01" {
   hostname = "vlab-esx-100.vballin.com"
   username = "root"
@@ -73,4 +89,16 @@ resource "vsphere_host" "tkg-mgmt-host-03" {
   thumbprint = "7C:14:03:AD:B3:46:AC:DC:FF:9A:8A:DF:5D:B9:69:5F:C0:F3:0D:6E"
   force = true
   cluster = vsphere_compute_cluster.tkg_mgmt.id
+}
+
+resource "vsphere_folder" "folder" {
+  path          = var.vm_folder
+  type          = "vm"
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
+resource "vsphere_folder" "tf-folder" {
+  path          = var.vm_folder_tf
+  type          = "vm"
+  datacenter_id = data.vsphere_datacenter.dc.id
 }

@@ -102,3 +102,38 @@ variable "datastore_4_path" {
   type        = string
   description = "NAS NFS Path"
 }
+
+variable "vm_folder" {
+  type        = string
+  description = "vm folder for packer"
+}
+
+variable "vm_folder_tf" {
+  type        = string
+  description = "vm folder for terraform"
+}
+
+variable "vm_folder_tkg" {
+  type        = string
+  description = "vm folder for terraform"
+}
+
+variable "mgmt_rp" {
+  type        = string
+  description = "resource pool for tkg mgmt"
+}
+
+variable "comp_rp" {
+  type        = string
+  description = "resource pool for tkg workloads"
+}
+
+variable "mgmt_net" {
+  type        = string
+  description = "tkg mgmt vlan"
+}
+
+variable "mgmt_net_vlan" {
+  type        = string
+  description = "tkg mgmt vlan"
+}
