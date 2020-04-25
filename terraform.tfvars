@@ -11,6 +11,7 @@ datacenter  = "vlab-dc"
 ## Resources Vars
 mgmt_rp = "tf-tkg-mgmt"
 comp_rp = "tf-tkg-workload"
+tf_vm_rp = "tf-terraform-vms"
 qnap_nas = "192.168.79.10"
 datastore_1 = "vlab-nfs-ds-01"
 datastore_2 = "vlab-nfs-ds-02"

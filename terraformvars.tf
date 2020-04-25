@@ -128,6 +128,10 @@ variable "comp_rp" {
   description = "resource pool for tkg workloads"
 }
 
+variable "tf_vm_rp" {
+  type        = string
+  description = "terraform vm rp"
+}
 variable "mgmt_net" {
   type        = string
   description = "tkg mgmt vlan"

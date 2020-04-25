@@ -58,6 +58,11 @@ resource "vsphere_resource_pool" "resource_pool-2" {
   parent_resource_pool_id = vsphere_compute_cluster.tkg_cluster.resource_pool_id
 }
 
+resource "vsphere_resource_pool" "resource_pool-3" {
+  name                    = var.tf_vm_rp
+  parent_resource_pool_id = vsphere_compute_cluster.tkg_mgmt.resource_pool_id
+}
+
 resource "vsphere_folder" "folder_tkg" {
   path          = var.vm_folder_tkg
   type          = "vm"
