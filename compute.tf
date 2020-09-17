@@ -63,6 +63,16 @@ resource "vsphere_resource_pool" "resource_pool-3" {
   parent_resource_pool_id = vsphere_compute_cluster.tkg_mgmt.resource_pool_id
 }
 
+resource "vsphere_resource_pool" "resource_pool-4" {
+  name                    = "tf-pks-mgmt"
+  parent_resource_pool_id = vsphere_compute_cluster.tkg_mgmt.resource_pool_id
+}
+
+resource "vsphere_resource_pool" "resource_pool-5" {
+  name                    = "tf-pks-comp"
+  parent_resource_pool_id = vsphere_compute_cluster.tkg_mgmt.resource_pool_id
+}
+
 resource "vsphere_folder" "folder_tkg" {
   path          = var.vm_folder_tkg
   type          = "vm"

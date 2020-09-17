@@ -69,15 +69,15 @@ resource "vsphere_distributed_virtual_switch" "dvs-mgmt" {
 
   host {
     host_system_id = data.vsphere_host.tkg_mgmt.0.id
-    devices        = ["vmnic0", "vmnic1"]
+    devices        = ["vmnic0"]
   }
   host {
     host_system_id = data.vsphere_host.tkg_mgmt.1.id
-    devices        = ["vmnic0", "vmnic1"]
+    devices        = ["vmnic0"]
   }
   host {
     host_system_id = data.vsphere_host.tkg_mgmt.2.id
-    devices        = ["vmnic0", "vmnic1"]
+    devices        = ["vmnic0"]
   }
 }
 
